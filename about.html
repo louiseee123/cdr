@@ -6,6 +6,8 @@
   <title>About Us | Toledo City CDRRMO</title>
   <meta name="description" content="Learn about the Toledo City Disaster Risk Reduction and Management Office. Our mission, vision, services, and contact information.">
 
+  <link rel="icon" type="image/png" href="assets/images/logocdrrmo.png">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +39,59 @@
   <!-- ==========================================
        HEADER (shared component)
        ========================================== -->
-  <navbar></navbar>
+  <header class="header">
+  <div class="header-container">
+    <div class="header-left">
+      <div class="header-brand" aria-label="Toledo City CDRRMO brand">
+        <div class="header-brand__right" aria-hidden="true">
+          <div class="header-brand__logo header-brand__logo--toledo" style="width: 56px; height: 56px; border-radius: 16px;">
+            <img src="assets/images/toledo.png" alt="Toledo City">
+          </div>
+
+        </div>
+        <div class="header-brand__logo header-brand__logo--cdrrmo" aria-hidden="true">
+          <img src="assets/images/logocdrrmo.png" alt="CDRRMO">
+        </div>
+
+        <div class="header-brand__title">
+          <div class="top">Toledo City</div>
+          <div class="bottom">City Disaster Risk Reduction and Management</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Use data-current-page on body to mark active link -->
+    <nav class="nav-menu">
+      <a href="index.html" class="nav-link" data-nav="home">Home</a>
+      <a href="weather.html" class="nav-link" data-nav="weather">Weather</a>
+      <a href="hazards.html" class="nav-link" data-nav="hazards">Hazards</a>
+      <a href="evacuation.html" class="nav-link" data-nav="evacuation">Evacuation</a>
+      <a href="gallery.html" class="nav-link" data-nav="gallery">Gallery</a>
+      <a href="about.html" class="nav-link" data-nav="about">About</a>
+    </nav>
+
+    <button class="menu-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  (function () {
+    try {
+      var current = (document.body && document.body.getAttribute('data-page')) || '';
+      var menu = document.querySelector('header .nav-menu');
+      if (!menu) return;
+      menu.querySelectorAll('.nav-link').forEach(function (a) {
+        var key = a.getAttribute('data-nav');
+        if (key && key === current) a.classList.add('active');
+      });
+    } catch (e) {}
+  })();
+</script>
+
 
 
 

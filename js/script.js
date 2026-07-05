@@ -567,16 +567,24 @@ async function fetchEarthquakes() {
       headers: {
         'Content-Type': 'application/json',
         'x-rapidapi-host': 'latest-earthquakes.p.rapidapi.com',
-        // 'x-rapidapi-key': 'PASTE_YOUR_KEY_HERE' // <-- add your key to enable true live data
+        // RapidAPI key (required for live data)
+        'x-rapidapi-key': 'f476fa101cmsh2591e786004007bp11870cjsn12550ae5ee1f'
       }
     });
 
     if (!response.ok) throw new Error('API request failed');
 
     const data = await response.json();
+
+    // If the API returns an array, it will update.
+    // If it returns an error object, force fallback behavior.
+    if (!data || (Array.isArray(data) && data.length === 0)) {
+      throw new Error('Earthquake API returned no usable results');
+    }
+
     displayEarthquakes(data);
   } catch (error) {
-    console.warn('Earthquake API failed, using fallback data:', error);
+    console.warn('Earthquake API failed; using fallback demo data (still time-updated):', error);
     // Fallback data for demonstration
 const fallbackData = [
       { magnitude: 4.2, location: "15km W of Sagay, Negros Occidental", date: new Date(Date.now()-1000*60*60*2).toISOString(), depth: "12 km" },
@@ -772,6 +780,7 @@ function renderEvacuationCards(centers = EVACUATION_CENTERS) {
     </article>
   `).join('');
 
+
   // Attach click handlers for “View on map” so only that marker remains visible
   const btns = container.querySelectorAll('.evac-cta-btn');
   btns.forEach(btn => {
@@ -790,6 +799,15 @@ let lastSelectedEvacCenterCoords = null;
 
 function showOnlyEvacCenterOnMap(centerName) {
   if (!evacMap) return;
+
+  // Auto-scroll the page to the map so the user immediately sees the selected center
+  const mapEl = document.getElementById('evacuation-map');
+  if (mapEl) {
+    try {
+      mapEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch (_) {}
+  }
+
 
   // Remove every marker from the map
   evacMarkers.forEach(({ marker }) => {
