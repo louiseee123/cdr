@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toledo City CDRRMO - Resilience Portal</title>
+  <link rel="icon" type="image/png" href="assets/images/logocdrrmo.png">
+  <meta name="description" content="Toledo City Disaster Risk Reduction and Management Office - Building a safer, adaptive, and disaster-resilient Toledo City for all 38 barangays.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style2.css">
+  <link rel="stylesheet" href="css/header-brand.css">
+</head>
+<body data-page="home">
+
+  <!-- ==========================================
+       ALERT BAR
+       ========================================== -->
+  <div class="alert-bar" id="alert-bar">
+    <i class="fas fa-check-circle"></i>
+    <span class="alert-message">No Active Warnings - All Clear. Stay safe, Toledo City!</span>
+    <span class="alert-time" data-timestamp="live"></span>
+    <div class="alert-expand">
+      Monitor weather conditions regularly. In case of emergency, contact CDRRMO Hotline at (032) 123-4567 or dial 117.
+    </div>
+    <button class="alert-close" aria-label="Close alert"><i class="fas fa-times"></i></button>
+  </div>
+
+  <!-- ==========================================
+       HEADER
+       ========================================== -->
+  <header class="header">
+    <div class="header-container">
+      <div class="header-left">
+        <div class="header-brand" aria-label="Toledo City CDRRMO brand">
+          <div class="header-brand__right" aria-hidden="true">
+            <div class="header-brand__logo" style="width: 56px; height: 56px; border-radius: 16px;">
+              <img src="assets/images/toledo.png" alt="Toledo City">
+            </div>
+          </div>
+          <div class="header-brand__logo" aria-hidden="true">
+            <img src="assets/images/logocdrrmo.png" alt="CDRRMO">
+          </div>
+          <div class="header-brand__title">
+            <div class="top">Toledo City</div>
+            <div class="bottom">City Disaster Risk Reduction and Management</div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="weather.html" class="nav-link">Weather</a>
+        <a href="hazards.html" class="nav-link">Hazards</a>
+        <a href="evacuation.html" class="nav-link">Evacuation</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="about.html" class="nav-link">About</a>
+      </nav>
+
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       HERO SECTION
+       ========================================== -->
+  <section class="hero">
+    <div class="hero-bg" style="background-image: url('assets/images/hero-bg.jpg');"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Safer, Adaptive, and Disaster-Resilient Toledo City</h1>
+      <p>The Toledo City CDRRMO is committed to proactive disaster risk reduction, timely warnings, and rapid emergency response for every resident across all 38 barangays.</p>
+      <div class="hero-buttons">
+        <a href="about.html#hotlines" class="btn btn-primary">
+          <i class="fas fa-phone-alt"></i> Emergency Hotlines
+        </a>
+        <a href="evacuation.html" class="btn btn-secondary">
+          <i class="fas fa-shield-alt"></i> Prepare Now
+        </a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       QUICK ACCESS CARDS
+       ========================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header" data-animate="fade-in-up">
+        <h2>Quick Access</h2>
+        <p>Stay informed and prepared with real-time monitoring tools and resources.</p>
+      </div>
+
+      <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+        <div class="quick-card quick-card--weather" data-animate="fade-in-up">
+          <div class="card-icon">
+            <i class="fas fa-cloud-sun"></i>
+          </div>
+          <h3>Weather Monitoring</h3>
+          <p>Real-time weather updates and wind monitoring for Toledo City and surrounding areas.</p>
+          <a href="weather.html" class="btn btn-gold btn-small quick-link">View Weather <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="quick-card quick-card--hazards" data-animate="fade-in-up">
+          <div class="card-icon">
+            <i class="fas fa-mountain"></i>
+          </div>
+          <h3>Hazard & Earthquake</h3>
+          <p>Seismic activity monitoring and barangay-specific hazard mapping for all 38 barangays.</p>
+          <a href="hazards.html" class="btn btn-gold btn-small quick-link">View Hazards <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="quick-card quick-card--evac" data-animate="fade-in-up">
+          <div class="card-icon">
+            <i class="fas fa-house-user"></i>
+          </div>
+          <h3>Evacuation Centers</h3>
+          <p>Find the nearest evacuation center for your barangay with interactive maps.</p>
+          <a href="evacuation.html" class="btn btn-gold btn-small quick-link">Find Centers <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       STATISTICS SECTION
+       ========================================== -->
+  <section class="section section-beige">
+    <div class="container">
+      <div class="section-header" data-animate="fade-in-up">
+        <h2>Our Impact</h2>
+        <p>Serving the entire Toledo City community with dedication and commitment.</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card" data-animate="fade-in-up">
+          <div class="stat-icon"><i class="fas fa-heart"></i></div>
+          <div class="stat-number">0</div>
+          <div class="stat-label">Casualties (Recent Events)</div>
+        </div>
+
+        <div class="stat-card" data-animate="fade-in-up">
+          <div class="stat-icon"><i class="fas fa-map-marked-alt"></i></div>
+          <div class="stat-number">38</div>
+          <div class="stat-label">Barangays Covered</div>
+        </div>
+
+        <div class="stat-card" data-animate="fade-in-up">
+          <div class="stat-icon"><i class="fas fa-clock"></i></div>
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Emergency Response</div>
+        </div>
+
+        <div class="stat-card" data-animate="fade-in-up">
+          <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Barangay Coverage</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       LATEST UPDATES / NEWS
+       ========================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header" data-animate="fade-in-up">
+        <h2>Latest Updates</h2>
+        <p>News and activities from the Toledo City CDRRMO.</p>
+      </div>
+
+      <div class="news-grid">
+        <article class="news-card" data-animate="fade-in-up">
+          <img src="assets/images/gallery/img1.jpg" alt="Earthquake Drill" class="news-image">
+          <div class="news-content">
+            <div class="news-date"><i class="fas fa-calendar-alt"></i> January 10, 2024</div>
+            <h4>CDRRMO Conducts Earthquake Drill in Barangay Cantabaco</h4>
+            <p>Barangay residents actively participated in the quarterly earthquake drill, practicing the Duck, Cover, and Hold procedure.</p>
+          </div>
+        </article>
+
+        <article class="news-card" data-animate="fade-in-up">
+          <img src="assets/images/gallery/img4.jpg" alt="QRT Training" class="news-image">
+          <div class="news-content">
+            <div class="news-date"><i class="fas fa-calendar-alt"></i> December 15, 2023</div>
+            <h4>Quick Response Team Completes Advanced Rescue Training</h4>
+            <p>Twenty new QRT members graduated from intensive search and rescue training, expanding our emergency response capacity.</p>
+          </div>
+        </article>
+
+        <article class="news-card" data-animate="fade-in-up">
+          <img src="assets/images/gallery/img6.jpg" alt="Disaster Preparedness" class="news-image">
+          <div class="news-content">
+            <div class="news-date"><i class="fas fa-calendar-alt"></i> November 28, 2023</div>
+            <h4>Barangay Officials Attend Disaster Preparedness Workshop</h4>
+            <p>Representatives from all 38 barangays participated in the annual disaster preparedness and planning workshop.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="text-center mt-4">
+        <a href="gallery.html" class="btn btn-gold btn-small">View All Updates <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       CALL TO ACTION
+       ========================================== -->
+  <section class="section section-navy">
+    <div class="container text-center" data-animate="fade-in-up">
+      <h2 class="text-white" style="margin-bottom: var(--space-sm);">Stay Prepared, Stay Safe</h2>
+      <p style="max-width: 600px; margin: 0 auto var(--space-md);">Know your evacuation center, understand your barangay's hazard profile, and keep emergency numbers accessible.</p>
+      <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+        <a href="evacuation.html" class="btn btn-primary">
+          <i class="fas fa-map-marker-alt"></i> Find Evacuation Center
+        </a>
+        <a href="hazards.html" class="btn btn-outline">
+          <i class="fas fa-chart-bar"></i> Check Hazard Map
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <div class="logo-shield" aria-label="Toledo City CDRRMO logo">
+              <img src="assets/images/logocdrrmo.png" alt="CDRRMO" style="width: 52px; height: 52px; object-fit: contain; display: block;">
+            </div>
+            <h4>Toledo City CDRRMO <span>Resilience Portal</span></h4>
+          </div>
+          <p style="font-size: 0.9375rem; line-height: 1.7;">Committed to building a safer, adaptive, and disaster-resilient Toledo City through proactive risk reduction and rapid emergency response.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h5>Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="weather.html"><i class="fas fa-chevron-right"></i> Weather Monitoring</a></li>
+            <li><a href="hazards.html"><i class="fas fa-chevron-right"></i> Hazard Monitoring</a></li>
+            <li><a href="evacuation.html"><i class="fas fa-chevron-right"></i> Evacuation Centers</a></li>
+            <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About & Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5>Emergency Hotlines</h5>
+          <ul class="footer-links">
+            <li><a href="tel:0321234567"><i class="fas fa-phone-alt"></i> CDRRMO: (032) 123-4567</a></li>
+            <li><a href="tel:117"><i class="fas fa-phone-alt"></i> Police: 117</a></li>
+            <li><a href="tel:160"><i class="fas fa-phone-alt"></i> Fire: 160</a></li>
+            <li><a href="tel:911"><i class="fas fa-phone-alt"></i> Emergency: 911</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5>Contact Information</h5>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt" style="color: var(--gold); margin-right: 8px;"></i> Toledo City Hall Complex, Poblacion, Toledo City, Cebu</li>
+            <li><i class="fas fa-envelope" style="color: var(--gold); margin-right: 8px;"></i> cdrmo@toledocity.gov.ph</li>
+            <li><i class="fas fa-clock" style="color: var(--gold); margin-right: 8px;"></i> Monday - Friday, 8:00 AM - 5:00 PM</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Toledo City CDRRMO. All rights reserved. Serving all 38 barangays of Toledo City.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
+</body>
+</html>

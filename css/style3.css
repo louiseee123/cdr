@@ -1,0 +1,99 @@
+/* ==========================================================
+   TOLEDO CDRRMO - Style 3 (Earthquake preparedness polish)
+   Included only where desired.
+   ========================================================== */
+
+:root {
+  --eq-card-bg: rgba(255, 255, 255, 0.78);
+  --eq-border: rgba(109, 16, 8, 0.12);
+}
+
+/* Make the section title area more compact and less “flat” */
+#earthquake-tips .section-header {
+  max-width: 860px;
+}
+
+/* Slightly enhance tip cards without changing base styles */
+#earthquake-tips .tips-grid {
+  gap: 18px;
+}
+
+#earthquake-tips .tip-card {
+  background: var(--eq-card-bg);
+  border-top: 4px solid rgba(196, 163, 90, 0.95);
+  border: 1px solid var(--eq-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+#earthquake-tips .tip-card h4 {
+  margin-bottom: 0.75rem;
+}
+
+/* Remove extra vertical clutter in the lists */
+#earthquake-tips .tip-card ul li {
+  padding: 7px 0;
+  margin: 0;
+}
+
+/* Add a subtle icon pill for each tip heading */
+#earthquake-tips .tip-card h4 i {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(196, 163, 90, 0.14);
+}
+
+/* Improve the Duck/Cover/Hold block */
+#earthquake-tips .duckcover-block {
+  margin-top: var(--space-lg) !important;
+  padding: calc(var(--space-lg) - 6px) !important;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: var(--shadow-sm);
+  background: rgba(255,255,255,0.82);
+}
+
+#earthquake-tips .duckcover-grid {
+  gap: 18px !important;
+}
+
+#earthquake-tips .duckcover-step {
+  padding: 0;
+}
+
+#earthquake-tips .duckcover-step .circle {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  margin: 0 auto var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.6rem;
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.14);
+  position: relative;
+}
+
+#earthquake-tips .duckcover-step .circle::after {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.35), transparent 55%);
+  pointer-events: none;
+}
+
+
+#earthquake-tips .duckcover-step h4 {
+  margin: 0 0 6px;
+}
+
+@media (max-width: 767px) {
+  #earthquake-tips .duckcover-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hazard & Earthquake Monitoring | Toledo City CDRRMO</title>
+  <meta name="description" content="Live seismic activity monitoring and barangay-specific hazard mapping for all 38 barangays of Toledo City, Cebu.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style2.css">
+  <link rel="stylesheet" href="css/header-brand.css">
+  <link rel="stylesheet" href="css/style3.css">
+
+</head>
+<body data-page="hazards">
+
+  <!-- ==========================================
+       ALERT BAR
+       ========================================== -->
+  <div class="alert-bar" id="alert-bar">
+    <i class="fas fa-check-circle"></i>
+    <span class="alert-message">No Active Warnings - All Clear. Stay safe, Toledo City!</span>
+    <span class="alert-time" data-timestamp="live"></span>
+    <div class="alert-expand">
+      Monitor weather conditions regularly. In case of emergency, contact CDRRMO Hotline at (032) 123-4567 or dial 117.
+    </div>
+    <button class="alert-close" aria-label="Close alert"><i class="fas fa-times"></i></button>
+  </div>
+
+  <!-- ==========================================
+       HEADER
+       ========================================== -->
+  <header class="header">
+    <div class="header-container">
+      <div class="header-left">
+        <div class="header-brand" aria-label="Toledo City CDRRMO brand">
+          <div class="header-brand__right" aria-hidden="true">
+            <div class="header-brand__logo" style="width: 56px; height: 56px; border-radius: 16px;">
+              <img src="assets/images/toledo.png" alt="Toledo City">
+            </div>
+          </div>
+          <div class="header-brand__logo" aria-hidden="true">
+            <img src="assets/images/logocdrrmo.png" alt="CDRRMO">
+          </div>
+          <div class="header-brand__title">
+            <div class="top">Toledo City</div>
+            <div class="bottom">City Disaster Risk Reduction and Management</div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+<a href="index.html" class="nav-link">Home</a>
+<a href="weather.html" class="nav-link">Weather</a>
+<a href="hazards.html" class="nav-link active">Hazards</a>
+<a href="evacuation.html" class="nav-link">Evacuation</a>
+<a href="gallery.html" class="nav-link">Gallery</a>
+<a href="about.html" class="nav-link">About</a>
+      </nav>
+
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       PAGE HEADER
+       ========================================== -->
+  <section class="page-header">
+    <div class="page-header-content">
+      <h1>Hazard & Earthquake Monitoring Center</h1>
+      <p>Live seismic data and hazard mapping for Toledo City</p>
+      <nav class="breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Hazards</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       LIVE EARTHQUAKE FEED
+       ========================================== -->
+  <section class="section">
+    <div class="container">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-md); flex-wrap: wrap; gap: var(--space-sm);">
+        <h2 style="margin: 0;"><i class="fas fa-broadcast-tower" style="color: var(--urgency-red); margin-right: 8px;"></i>Live Earthquake Feed</h2>
+        <span class="live-indicator" id="eq-indicator">
+          <span class="pulse"></span>
+          <span>Live Feed Active</span>
+        </span>
+      </div>
+
+      <p class="text-muted" style="margin-bottom: var(--space-md);">
+        <i class="fas fa-filter"></i> Showing recent earthquakes affecting the Visayas region. Auto-refreshes every 2 minutes.
+      </p>
+
+      <div class="hazard-table-container">
+        <table class="hazard-table">
+          <thead>
+            <tr>
+              <th>Magnitude</th>
+              <th>Location</th>
+              <th>Date & Time</th>
+              <th>Depth</th>
+            </tr>
+          </thead>
+          <tbody id="earthquake-table-body">
+            <tr>
+              <td colspan="4" style="text-align: center; padding: var(--space-lg); color: var(--text-muted);">
+                <i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Fetching earthquake data...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top: var(--space-sm); font-size: 0.8125rem; color: var(--text-muted);">
+        <i class="fas fa-info-circle"></i> Color coding: <span style="color: var(--status-low); font-weight: 600;">Green</span> = Below 4.0 |
+        <span style="color: var(--status-moderate); font-weight: 600;">Yellow</span> = 4.0 to 5.9 |
+        <span style="color: var(--status-high); font-weight: 600;">Red</span> = 6.0 and above
+      </p>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       PROJECT NOAH INTEGRATION
+       ========================================== -->
+  <section class="section section-beige">
+    
+
+      <div class="noah-section" data-animate="fade-in-up">
+        <div style="max-width: 92px; height: 92px; background: var(--gradient-solid); border-radius: 26px; margin: 0 auto var(--space-md); display: flex; align-items: center; justify-content: center; font-size: 2.2rem; color: var(--gold); position: relative;">
+          <i class="fas fa-map"></i>
+        </div>
+
+        <h3 style="margin-bottom: var(--space-sm);">HazardHunterPH Georisk</h3>
+        <p>Use HazardHunterPH Georisk to explore hazard maps. Search within the embedded tool to find Toledo City and barangays.</p>
+
+
+        <!-- HazardHunterPH embed (external) -->
+        <div class="noah-embed-wrap" aria-label="HazardHunterPH Georisk (external) embedded experience">
+          <iframe
+            title="Hazard Hunter - Toledo City"
+            src="https://hazardhunter.georisk.gov.ph/?location=toledo-city"
+            loading="lazy"
+            referrerpolicy="no-referrer"
+            allow="geolocation"
+          ></iframe>
+        </div>
+
+        <p class="text-muted" style="margin-top: var(--space-sm); font-size: 0.875rem;">
+          <i class="fas fa-info-circle" style="color: var(--gold); margin-right: 6px;"></i>
+          If the embed is slow or blocked by browser settings, open HazardHunterPH in your browser.
+        </p>
+      </div>
+
+      <div style="margin-top: var(--space-lg); padding: var(--space-md); background: var(--bg-card); border-radius: var(--radius-lg);" data-animate="fade-in-up">
+        <h4 style="margin-bottom: var(--space-sm);"><i class="fas fa-info-circle" style="color: var(--gold); margin-right: 6px;"></i>How to Use HazardHunterPH</h4>
+        <ol style="padding-left: var(--space-md); color: var(--text-secondary);">
+          <li style="margin-bottom: 8px;">This page loads HazardHunterPH already centered on <strong>Toledo City</strong>.</li>
+          <li style="margin-bottom: 8px;">Use the layer controls to switch between hazard types.</li>
+          <li style="margin-bottom: 8px;">Zoom/pan inside the embedded map to explore locations.</li>
+          <li>Click map areas (if enabled) to view risk details.</li>
+        </ol>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       BARANGAY HAZARD SUSCEPTIBILITY
+       ========================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header" data-animate="fade-in-up">
+        <h2>Barangay Hazard Susceptibility</h2>
+        <p>Flood, landslide, and earthquake susceptibility ratings for all 38 barangays of Toledo City.</p>
+      </div>
+
+      <div class="search-bar" data-animate="fade-in-up">
+        <input type="text" id="hazard-search" class="search-input" placeholder="Search barangay name...">
+      </div>
+
+      <div class="hazard-table-container" data-animate="fade-in-up">
+        <table class="hazard-table">
+          <thead>
+            <tr>
+              <th style="width: 50px;">#</th>
+              <th>Barangay</th>
+              <th>Flood Susceptibility</th>
+              <th>Landslide Susceptibility</th>
+              <th>Earthquake Susceptibility</th>
+            </tr>
+          </thead>
+          <tbody id="hazard-table-body">
+            <!-- Populated by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display: flex; gap: var(--space-md); justify-content: center; margin-top: var(--space-md); flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 6px; font-size: 0.875rem; color: var(--text-secondary);">
+          <span style="width: 12px; height: 12px; background: var(--status-low); border-radius: 50%; display: inline-block;"></span> Low
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; font-size: 0.875rem; color: var(--text-secondary);">
+          <span style="width: 12px; height: 12px; background: var(--status-moderate); border-radius: 50%; display: inline-block;"></span> Moderate
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; font-size: 0.875rem; color: var(--text-secondary);">
+          <span style="width: 12px; height: 12px; background: var(--status-high); border-radius: 50%; display: inline-block;"></span> High
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       EARTHQUAKE PREPAREDNESS TIPS
+       ========================================== -->
+  <section class="section section-beige" id="earthquake-tips">
+    <div class="container">
+      <div class="section-header" data-animate="fade-in-up">
+        <h2>Earthquake Preparedness Tips</h2>
+        <p>What to do before, during, and after an earthquake.</p>
+      </div>
+
+      <div class="tips-grid">
+
+        <div class="tip-card" data-animate="fade-in-up">
+          <h4><i class="fas fa-clipboard-list"></i> Before an Earthquake</h4>
+          <ul>
+            <li><i class="fas fa-check"></i> Secure heavy furniture and appliances to walls</li>
+            <li><i class="fas fa-check"></i> Know the location of your evacuation center</li>
+            <li><i class="fas fa-check"></i> Prepare an emergency go-bag with essentials</li>
+            <li><i class="fas fa-check"></i> Identify safe spots in each room (under sturdy tables)</li>
+            <li><i class="fas fa-check"></i> Keep emergency numbers accessible</li>
+            <li><i class="fas fa-check"></i> Participate in community earthquake drills</li>
+          </ul>
+        </div>
+
+        <div class="tip-card" data-animate="fade-in-up">
+          <h4><i class="fas fa-running"></i> During an Earthquake</h4>
+          <ul>
+            <li><i class="fas fa-check"></i> <strong>DUCK</strong> down to the floor</li>
+            <li><i class="fas fa-check"></i> <strong>COVER</strong> your head and neck</li>
+            <li><i class="fas fa-check"></i> <strong>HOLD ON</strong> to your shelter</li>
+            <li><i class="fas fa-check"></i> Stay away from windows and glass</li>
+            <li><i class="fas fa-check"></i> If outdoors, move to an open area</li>
+            <li><i class="fas fa-check"></i> Do not use elevators</li>
+          </ul>
+        </div>
+
+        <div class="tip-card" data-animate="fade-in-up">
+          <h4><i class="fas fa-hands-helping"></i> After an Earthquake</h4>
+          <ul>
+            <li><i class="fas fa-check"></i> Check yourself and others for injuries</li>
+            <li><i class="fas fa-check"></i> Be prepared for aftershocks</li>
+            <li><i class="fas fa-check"></i> Check for gas leaks and electrical damage</li>
+            <li><i class="fas fa-check"></i> Listen to radio for emergency updates</li>
+            <li><i class="fas fa-check"></i> Use stairs when evacuating buildings</li>
+            <li><i class="fas fa-check"></i> Keep streets clear for emergency vehicles</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Duck, Cover, Hold Infographic -->
+      <div class="duckcover-block" style="margin-top: var(--space-lg); padding: var(--space-lg); background: var(--bg-card); border-radius: var(--radius-lg); text-align: center;" data-animate="fade-in-up">
+        <h3 style="margin-bottom: var(--space-md); color: var(--urgency-red);"><i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i>Remember: Duck, Cover, and Hold</h3>
+        <div class="duckcover-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--space-lg); margin-top: var(--space-md);">
+
+          <div class="duckcover-step">
+            <div class="circle" style="background: var(--urgency-red);">
+              <i class="fas fa-arrow-down"></i>
+            </div>
+            <h4 style="color: var(--urgency-red);">DUCK</h4>
+            <p style="font-size: 0.9375rem; color: var(--text-secondary);">Get down to the ground</p>
+          </div>
+
+          <div class="duckcover-step">
+            <div class="circle" style="background: var(--warm-orange);">
+              <i class="fas fa-hands"></i>
+            </div>
+            <h4 style="color: var(--warm-orange);">COVER</h4>
+            <p style="font-size: 0.9375rem; color: var(--text-secondary);">Protect head and neck</p>
+          </div>
+
+          <div class="duckcover-step">
+            <div class="circle" style="background: var(--resilience-green);">
+              <i class="fas fa-hand-paper"></i>
+            </div>
+            <h4 style="color: var(--resilience-green);">HOLD</h4>
+            <p style="font-size: 0.9375rem; color: var(--text-secondary);">Stay in position until shaking stops</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Emergency Numbers -->
+      <div style="margin-top: var(--space-lg); padding: var(--space-md); background: var(--urgency-red); border-radius: var(--radius-lg); color: white; text-align: center;" data-animate="fade-in-up">
+        <h3 style="color: white; margin-bottom: var(--space-sm);"><i class="fas fa-phone-alt" style="margin-right: 8px;"></i>Emergency Hotlines</h3>
+        <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+          <div><strong>CDRRMO:</strong> (032) 123-4567</div>
+          <div><strong>Police:</strong> 117</div>
+          <div><strong>Fire:</strong> 160</div>
+          <div><strong>Emergency:</strong> 911</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <div class="logo-shield" aria-label="Toledo City CDRRMO logo">
+              <img src="assets/images/logocdrrmo.png" alt="CDRRMO" style="width: 30px; height: 30px; object-fit: contain; display: block; filter: drop-shadow(0 2px 10px rgba(0,0,0,0.12));">
+            </div>
+            <h4>Toledo City CDRRMO <span>Resilience Portal</span></h4>
+          </div>
+          <p style="font-size: 0.9375rem; line-height: 1.7;">Committed to building a safer, adaptive, and disaster-resilient Toledo City through proactive risk reduction and rapid emergency response.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h5>Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="weather.html"><i class="fas fa-chevron-right"></i> Weather Monitoring</a></li>
+            <li><a href="hazards.html"><i class="fas fa-chevron-right"></i> Hazard Monitoring</a></li>
+            <li><a href="evacuation.html"><i class="fas fa-chevron-right"></i> Evacuation Centers</a></li>
+            <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About & Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5>Emergency Hotlines</h5>
+          <ul class="footer-links">
+            <li><a href="tel:0321234567"><i class="fas fa-phone-alt"></i> CDRRMO: (032) 123-4567</a></li>
+            <li><a href="tel:117"><i class="fas fa-phone-alt"></i> Police: 117</a></li>
+            <li><a href="tel:160"><i class="fas fa-phone-alt"></i> Fire: 160</a></li>
+            <li><a href="tel:911"><i class="fas fa-phone-alt"></i> Emergency: 911</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5>Contact Information</h5>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt" style="color: var(--gold); margin-right: 8px;"></i> Toledo City Hall Complex, Poblacion, Toledo City, Cebu</li>
+            <li><i class="fas fa-envelope" style="color: var(--gold); margin-right: 8px;"></i> cdrmo@toledocity.gov.ph</li>
+            <li><i class="fas fa-clock" style="color: var(--gold); margin-right: 8px;"></i> Monday - Friday, 8:00 AM - 5:00 PM</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Toledo City CDRRMO. All rights reserved. Serving all 38 barangays of Toledo City.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
+</body>
+</html>

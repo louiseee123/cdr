@@ -1,0 +1,76 @@
+/* ==========================================================
+   Header Brand (Toledo City logo + CDRRMO)
+   ========================================================== */
+
+.header-left {
+  gap: 14px;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-brand__logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.header-brand__logo img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  display: block;
+}
+
+.header-brand__title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.header-brand__title .top {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--primary);
+  letter-spacing: 0.2px;
+}
+
+.header-brand__title .bottom {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+}
+
+.header-brand__right {
+  border-left: 1px solid rgba(109, 16, 8, 0.15);
+  padding-left: 12px;
+}
+
+.header-brand__right .top {
+  color: var(--deep-navy);
+}
+
+/* Mobile tweak */
+@media (max-width: 480px) {
+  .header-brand__logo,
+  .header-brand__logo img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .header-brand__title .top {
+    font-size: 0.95rem;
+  }
+}
+

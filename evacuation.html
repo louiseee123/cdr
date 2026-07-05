@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evacuation Center Locator | Toledo City CDRRMO</title>
+  <meta name="description" content="Find the nearest evacuation center for your barangay in Toledo City, Cebu. Interactive map with 40 evacuation centers across all 38 barangays.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style2.css">
+  <link rel="stylesheet" href="css/header-brand.css">
+</head>
+<body data-page="evacuation">
+
+  <!-- ==========================================
+       ALERT BAR
+       ========================================== -->
+  <div class="alert-bar" id="alert-bar">
+    <i class="fas fa-check-circle"></i>
+    <span class="alert-message">No Active Warnings - All Clear. Stay safe, Toledo City!</span>
+    <span class="alert-time" data-timestamp="live"></span>
+    <div class="alert-expand">
+      Monitor weather conditions regularly. In case of emergency, contact CDRRMO Hotline at (032) 123-4567 or dial 117.
+    </div>
+    <button class="alert-close" aria-label="Close alert"><i class="fas fa-times"></i></button>
+  </div>
+
+  <!-- ==========================================
+       HEADER
+       ========================================== -->
+  <header class="header">
+    <div class="header-container">
+      <div class="header-left">
+        <div class="header-brand" aria-label="Toledo City CDRRMO brand">
+          <div class="header-brand__right" aria-hidden="true">
+            <div class="header-brand__logo" style="width: 56px; height: 56px; border-radius: 16px;">
+              <img src="assets/images/toledo.png" alt="Toledo City">
+            </div>
+          </div>
+          <div class="header-brand__logo" aria-hidden="true">
+            <img src="assets/images/logocdrrmo.png" alt="CDRRMO">
+          </div>
+          <div class="header-brand__title">
+            <div class="top">Toledo City</div>
+            <div class="bottom">City Disaster Risk Reduction and Management</div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+<a href="index.html" class="nav-link">Home</a>
+<a href="weather.html" class="nav-link">Weather</a>
+<a href="hazards.html" class="nav-link">Hazards</a>
+<a href="evacuation.html" class="nav-link active">Evacuation</a>
+<a href="gallery.html" class="nav-link">Gallery</a>
+<a href="about.html" class="nav-link">About</a>
+      </nav>
+
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       PAGE HEADER
+       ========================================== -->
+  <section class="page-header">
+    <div class="page-header-content">
+      <h1>Evacuation Center Locator</h1>
+      <p>Find the nearest evacuation center for your barangay</p>
+      <nav class="breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Evacuation Centers</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SEARCH & FILTER
+       ========================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header" data-animate="fade-in-up">
+        <h2><i class="fas fa-search" style="color: var(--primary); margin-right: 8px;"></i>Evacuation Center Locator</h2>
+        <p>Choose your barangay or search. The list and map update instantly.</p>
+      </div>
+
+      <div class="search-bar evac-searchbar" data-animate="fade-in-up">
+        <select id="barangay-filter" class="search-select">
+          <option value="all" selected>All Barangays</option>
+        </select>
+
+        <div class="evac-search-wrap">
+          <i class="fas fa-magnifying-glass"></i>
+          <input type="text" id="evac-search" class="search-input evac-search" placeholder="Search center or barangay..." autocomplete="off">
+        </div>
+
+        <button class="btn btn-primary" type="button" onclick="filterEvacuationCenters()">
+          <i class="fas fa-filter"></i> Filter
+        </button>
+      </div>
+
+
+      <!-- Instructions -->
+      <div style="background: rgba(109, 16, 8, 0.05); border-left: 4px solid var(--primary); padding: var(--space-md); border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-bottom: var(--space-md);" data-animate="fade-in-up">
+        <p style="margin: 0; font-size: 0.9375rem;"><i class="fas fa-info-circle" style="color: var(--primary); margin-right: 8px;"></i><strong>How to find your evacuation center:</strong> Select your barangay from the dropdown menu above. The list and map will update to show only evacuation centers in your area. Click on any map marker to see details.</p>
+      </div>
+
+      <!-- Leaflet Map -->
+      <div class="map-container" id="evacuation-map" data-animate="fade-in-up" style="margin-bottom: var(--space-lg);"></div>
+
+      <!-- Evacuation Centers List -->
+      <h3 style="margin-bottom: var(--space-md);" data-animate="fade-in-up">
+        <i class="fas fa-list" style="color: var(--primary); margin-right: 8px;"></i>Evacuation Centers
+        <span id="center-count" style="font-size: 0.875rem; color: var(--text-muted); font-weight: 400;">(Showing all)</span>
+      </h3>
+
+      <div class="evac-grid" id="evacuation-list" data-animate="fade-in-up">
+        <!-- Populated by JavaScript -->
+      </div>
+
+      <p id="evac-empty" class="text-center text-muted" style="display:none; margin-top: var(--space-md);">
+        No evacuation centers match your search.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SAFETY REMINDER
+       ========================================== -->
+  <section class="section section-beige">
+    <div class="container">
+      <div style="background: var(--bg-card); padding: var(--space-lg); border-radius: var(--radius-lg); text-align: center;" data-animate="fade-in-up">
+        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--resilience-green), #3d5c35); border-radius: 50%; margin: 0 auto var(--space-md); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white;">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3 style="margin-bottom: var(--space-sm);">Be Prepared, Stay Safe</h3>
+        <p style="max-width: 600px; margin: 0 auto var(--space-md);">Know your evacuation route, prepare an emergency kit, and stay informed through official channels. During emergencies, follow instructions from barangay officials and CDRRMO personnel.</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-md); text-align: left; margin-top: var(--space-lg);">
+          <div style="display: flex; align-items: flex-start; gap: var(--space-sm);">
+            <i class="fas fa-first-aid" style="color: var(--urgency-red); font-size: 1.25rem; margin-top: 2px;"></i>
+            <div>
+              <h5 style="margin-bottom: 4px;">Emergency Kit</h5>
+              <p style="font-size: 0.875rem; margin: 0;">Water, food, flashlight, batteries, first aid kit, whistle, and important documents.</p>
+            </div>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: var(--space-sm);">
+            <i class="fas fa-route" style="color: var(--warm-orange); font-size: 1.25rem; margin-top: 2px;"></i>
+            <div>
+              <h5 style="margin-bottom: 4px;">Evacuation Route</h5>
+              <p style="font-size: 0.875rem; margin: 0;">Plan at least two routes to your evacuation center. Practice with your family.</p>
+            </div>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: var(--space-sm);">
+            <i class="fas fa-broadcast-tower" style="color: var(--resilience-green); font-size: 1.25rem; margin-top: 2px;"></i>
+            <div>
+              <h5 style="margin-bottom: 4px;">Stay Informed</h5>
+              <p style="font-size: 0.875rem; margin: 0;">Monitor official announcements via radio, social media, and barangay officials.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <div class="logo-shield" aria-label="Toledo City CDRRMO logo">
+              <img src="assets/images/logocdrrmo.png" alt="CDRRMO" style="width: 30px; height: 30px; object-fit: contain; display: block; filter: drop-shadow(0 2px 10px rgba(0,0,0,0.12));">
+            </div>
+            <h4>Toledo City CDRRMO <span>Resilience Portal</span></h4>
+          </div>
+          <p style="font-size: 0.9375rem; line-height: 1.7;">Committed to building a safer, adaptive, and disaster-resilient Toledo City through proactive risk reduction and rapid emergency response.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h5>Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="weather.html"><i class="fas fa-chevron-right"></i> Weather Monitoring</a></li>
+            <li><a href="hazards.html"><i class="fas fa-chevron-right"></i> Hazard Monitoring</a></li>
+            <li><a href="evacuation.html"><i class="fas fa-chevron-right"></i> Evacuation Centers</a></li>
+            <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About & Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5>Emergency Hotlines</h5>
+          <ul class="footer-links">
+            <li><a href="tel:0321234567"><i class="fas fa-phone-alt"></i> CDRRMO: (032) 123-4567</a></li>
+            <li><a href="tel:117"><i class="fas fa-phone-alt"></i> Police: 117</a></li>
+            <li><a href="tel:160"><i class="fas fa-phone-alt"></i> Fire: 160</a></li>
+            <li><a href="tel:911"><i class="fas fa-phone-alt"></i> Emergency: 911</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5>Contact Information</h5>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt" style="color: var(--gold); margin-right: 8px;"></i> Toledo City Hall Complex, Poblacion, Toledo City, Cebu</li>
+            <li><i class="fas fa-envelope" style="color: var(--gold); margin-right: 8px;"></i> cdrmo@toledocity.gov.ph</li>
+            <li><i class="fas fa-clock" style="color: var(--gold); margin-right: 8px;"></i> Monday - Friday, 8:00 AM - 5:00 PM</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Toledo City CDRRMO. All rights reserved. Serving all 38 barangays of Toledo City.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
+</body>
+</html>

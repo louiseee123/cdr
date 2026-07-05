@@ -1,0 +1,43 @@
+/* ==========================================================
+   Weather card polish (separate file for quick iteration)
+   ========================================================== */
+
+.weather-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.weather-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background:
+    radial-gradient(600px 180px at 20% 0%, rgba(196,163,90,0.18), transparent 55%),
+    radial-gradient(540px 220px at 80% 10%, rgba(109,16,8,0.10), transparent 60%);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.weather-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Better hierarchy */
+.weather-card h3 {
+  margin-bottom: var(--space-sm);
+}
+
+.weather-temp {
+  letter-spacing: 0.2px;
+  text-shadow: 0 2px 18px rgba(109,16,8,0.10);
+}
+
+.weather-item {
+  border-bottom: 1px solid rgba(237,230,216,0.7);
+}
+
+.weather-item:last-child {
+  border-bottom: none;
+}
+
