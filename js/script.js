@@ -578,8 +578,8 @@ async function fetchEarthquakes() {
   } catch (error) {
     console.warn('Earthquake API failed, using fallback data:', error);
     // Fallback data for demonstration
-    const fallbackData = [
-      { magnitude: 4.2, location: "15km W of Sagay, Negros Occidental", date: new Date(Date.now()-1000*60*60*2).toISOString(), depth: "12 km" }
+const fallbackData = [
+      { magnitude: 4.2, location: "15km W of Sagay, Negros Occidental", date: new Date(Date.now()-1000*60*60*2).toISOString(), depth: "12 km" },
       { magnitude: 3.8, location: "22km SE of Toledo City, Cebu", date: new Date(Date.now()-1000*60*60*4).toISOString(), depth: "8 km" },
       { magnitude: 5.1, location: "45km N of Dumaguete City, Negros Oriental", date: new Date(Date.now()-1000*60*60*6).toISOString(), depth: "25 km" },
       { magnitude: 2.9, location: "8km E of Balamban, Cebu", date: new Date(Date.now()-1000*60*60*9).toISOString(), depth: "5 km" },
