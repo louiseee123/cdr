@@ -123,7 +123,16 @@
       </div>
 
       <!-- Leaflet Map -->
-      <div class="map-container" id="evacuation-map" data-animate="fade-in-up" style="margin-bottom: var(--space-lg);"></div>
+      <div class="map-container" id="evacuation-map" data-animate="fade-in-up" style="margin-bottom: var(--space-lg); position: relative;">
+        <button
+          id="directions-btn"
+          type="button"
+          class="btn btn-primary"
+          style="position: absolute; top: 14px; right: 14px; z-index: 999; display: none; gap: 8px; align-items: center;"
+        >
+          <i class="fas fa-route"></i> Need Directions
+        </button>
+      </div>
 
       <!-- Evacuation Centers List -->
       <h3 style="margin-bottom: var(--space-md);" data-animate="fade-in-up">

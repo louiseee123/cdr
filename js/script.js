@@ -786,6 +786,8 @@ function renderEvacuationCards(centers = EVACUATION_CENTERS) {
 
 }
 
+let lastSelectedEvacCenterCoords = null;
+
 function showOnlyEvacCenterOnMap(centerName) {
   if (!evacMap) return;
 
@@ -799,11 +801,55 @@ function showOnlyEvacCenterOnMap(centerName) {
   if (!match || !match.marker) return;
 
   match.marker.addTo(evacMap);
+  lastSelectedEvacCenterCoords = match.coords;
 
   // Pan/zoom to it
   try {
     evacMap.setView(match.marker.getLatLng(), 14, { animate: true });
   } catch (_) {}
+
+  // Show “Need Directions” button
+  const directionsBtn = document.getElementById('directions-btn');
+  if (directionsBtn) directionsBtn.style.display = 'inline-flex';
+}
+
+function initDirectionsButton() {
+  const directionsBtn = document.getElementById('directions-btn');
+  if (!directionsBtn) return;
+
+  // Hidden until a center is selected
+  directionsBtn.style.display = 'none';
+
+  directionsBtn.addEventListener('click', () => {
+    if (!lastSelectedEvacCenterCoords) return;
+
+    if (!('geolocation' in navigator)) {
+      alert('Geolocation is not supported by your browser.');
+      return;
+    }
+
+    directionsBtn.disabled = true;
+    directionsBtn.innerHTML = '<i class="fas fa-location-crosshairs"></i> Getting location...';
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const userLat = pos.coords.latitude;
+        const userLng = pos.coords.longitude;
+        const [destLat, destLng] = lastSelectedEvacCenterCoords;
+
+        const url = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(userLat + ',' + userLng)}&destination=${encodeURIComponent(destLat + ',' + destLng)}&travelmode=driving`;
+        window.open(url, '_blank');
+      },
+      (err) => {
+        console.warn('Geolocation error:', err);
+        alert('Unable to get your location. Please allow location access and try again.');
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 30000 }
+    ).finally(() => {
+      directionsBtn.disabled = false;
+      directionsBtn.innerHTML = '<i class="fas fa-route"></i> Need Directions';
+    });
+  });
 }
 
 
@@ -1143,6 +1189,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     case 'evacuation':
       initEvacuationPage();
+      initDirectionsButton();
       break;
 
     case 'gallery':
