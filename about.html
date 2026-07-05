@@ -35,43 +35,12 @@
   </div>
 
   <!-- ==========================================
-       HEADER
+       HEADER (shared component)
        ========================================== -->
-  <header class="header">
-    <div class="header-container">
-      <div class="header-left">
-        <div class="header-brand" aria-label="Toledo City CDRRMO brand">
-          <div class="header-brand__right" aria-hidden="true">
-            <div class="header-brand__logo" style="width: 56px; height: 56px; border-radius: 16px;">
-              <img src="assets/images/toledo.png" alt="Toledo City">
-            </div>
-          </div>
-          <div class="header-brand__logo" aria-hidden="true">
-            <img src="assets/images/logocdrrmo.png" alt="CDRRMO">
-          </div>
-          <div class="header-brand__title">
-            <div class="top">Toledo City</div>
-            <div class="bottom">City Disaster Risk Reduction and Management</div>
-          </div>
-        </div>
-      </div>
+  <navbar></navbar>
 
-      <nav class="nav-menu">
-<a href="index.html" class="nav-link">Home</a>
-<a href="weather.html" class="nav-link">Weather</a>
-<a href="hazards.html" class="nav-link">Hazards</a>
-<a href="evacuation.html" class="nav-link">Evacuation</a>
-<a href="gallery.html" class="nav-link">Gallery</a>
-<a href="about.html" class="nav-link active">About</a>
-      </nav>
 
-      <button class="menu-toggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </header>
+
 
   <!-- ==========================================
        PAGE HEADER
@@ -95,16 +64,16 @@
     <div class="container">
       <div class="about-layout">
         <div class="about-content" data-animate="fade-in-up">
-          <h3><i class="fas fa-landmark" style="color: var(--gold); margin-right: 8px;"></i>History</h3>
+          <h3>History</h3>
           <p>The Toledo City Disaster Risk Reduction and Management Office (CDRRMO) was established in accordance with Republic Act 10121, also known as the Philippine Disaster Risk Reduction and Management Act of 2010. Since its inception, the office has been at the forefront of disaster preparedness, response, and recovery efforts for all 38 barangays of Toledo City.</p>
 
-          <h3><i class="fas fa-bullseye" style="color: var(--gold); margin-right: 8px;"></i>Mission</h3>
+          <h3>Mission</h3>
           <p>To build a safer, adaptive, and disaster-resilient Toledo City through proactive risk reduction, timely emergency response, and sustainable community preparedness programs that protect lives, livelihoods, and the environment.</p>
 
-          <h3><i class="fas fa-eye" style="color: var(--gold); margin-right: 8px;"></i>Vision</h3>
+          <h3>Vision</h3>
           <p>A Toledo City where every community is empowered, resilient, and capable of withstanding and recovering from all forms of disasters through effective governance, active partnerships, and a culture of preparedness.</p>
 
-          <h3><i class="fas fa-heart" style="color: var(--gold); margin-right: 8px;"></i>Core Values</h3>
+          <h3>Core Values</h3>
           <div class="values-grid">
             <div class="value-item">
               <i class="fas fa-shield-alt"></i>
@@ -136,7 +105,7 @@
             </div>
           </div>
 
-          <h3><i class="fas fa-tasks" style="color: var(--gold); margin-right: 8px;"></i>Our Services</h3>
+          <h3>Our Services</h3>
           <ul style="padding-left: var(--space-md); color: var(--text-secondary);">
             <li style="margin-bottom: 8px;">24/7 Emergency Operations Center monitoring</li>
             <li style="margin-bottom: 8px;">Search, rescue, and retrieval operations</li>
@@ -148,18 +117,22 @@
             <li>Coordination with national and regional DRRM agencies</li>
           </ul>
 
-          <h3><i class="fas fa-map-marked-alt" style="color: var(--gold); margin-right: 8px;"></i>Coverage</h3>
+          <h3>Coverage</h3>
           <p>The Toledo City CDRRMO provides comprehensive disaster risk reduction and management services to all <strong>38 barangays</strong> of Toledo City, ensuring no community is left behind in our quest for resilience.</p>
+
         </div>
 
         <div data-animate="fade-in-up">
+          <!-- TODO: right column content (image + organizational structure) -->
           <div class="about-image">
             <img src="assets/images/team-photo.jpg" alt="Toledo City CDRRMO Team">
           </div>
 
           <!-- Organizational Structure -->
+          <!-- (icon already removed from the section heading) -->
           <div style="margin-top: var(--space-md); background: var(--bg-beige); padding: var(--space-md); border-radius: var(--radius-lg);">
-            <h4 style="margin-bottom: var(--space-sm); text-align: center;"><i class="fas fa-sitemap" style="color: var(--primary); margin-right: 6px;"></i>Organizational Structure</h4>
+            <h4 style="margin-bottom: var(--space-sm); text-align: center;">Organizational Structure</h4>
+
             <div style="display: flex; flex-direction: column; gap: 8px;">
               <div style="background: var(--primary); color: white; padding: var(--space-sm); border-radius: var(--radius-md); text-align: center; font-weight: 600;">
                 <i class="fas fa-user" style="margin-right: 6px;"></i>CDRRMO Head
